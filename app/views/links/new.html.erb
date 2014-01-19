@@ -1,0 +1,32 @@
+<h1>New link</h1>
+
+<%= form_for(@link, remote: true, format: :json) do |f| %>
+	<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+  <% if @link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+      <% @link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :uri %><br>
+    <%= f.text_field :uri %>
+  </div>
+  <div class="field">
+    <%= f.label :short_route %><br>
+    <%= f.text_field :short_route %>
+  </div>
+  <div class="actions">
+		<%= f.submit 'Shorten' %>
+  </div>
+<% end %>
+  <div class="field">
+    <%= label_tag :shortened_link %><br>
+    <%= text_field_tag :shortened_link %>
+  </div>

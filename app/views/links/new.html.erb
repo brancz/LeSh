@@ -28,5 +28,7 @@
 <% end %>
   <div class="field">
     <%= label_tag :shortened_link %><br>
-    <%= text_field_tag :shortened_link %>
+    <%= text_field_tag 'shortened_link', root_url, disabled: true %>
   </div>
+
+<%= button_tag "Copy", id: "copy_button" %>

@@ -43,3 +43,6 @@ end
 
 # Use whenever
 gem 'whenever'
+
+# Use base62 gem to convert integer to string
+gem 'base62'

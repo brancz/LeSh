@@ -7,9 +7,12 @@ class Link < ActiveRecord::Base
 	validates :short_route, uniqueness: true
 
 	def ensure_short_route
-		if !self.short_route.nil? || !self.short_route.blank?
-			hash = Digest::SHA1.base64digest self.uri + Time.now.to_s
-			self.short_route = hash[0, 8]
+		if self.short_route.nil? || self.short_route.blank?
+			require 'base62'
+			last_link = Link.last
+			next_id = ( last_link.id + 1 ) if last_link
+			next_id ||= 0
+			self.short_route = next_id.base62_encode
 		end
 	end
 end

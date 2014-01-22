@@ -1,4 +1,14 @@
-<h1>New link</h1>
+<div class='row'>
+	<div class='col-lg-4 col-lg-offset-4'>
+		<h1 class='text-center'>LeSh</h1>
+	</div>
+</div>
+
+<div class='row'>
+	<div class='col-lg-4 col-lg-offset-4'>
+		<h2 class='text-center'>Le Link Shortener</h2>
+	</div>
+</div>
 
 <%= form_for(@link, remote: true, format: :json) do |f| %>
 	<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
@@ -14,17 +24,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :uri %><br>
-    <%= f.text_field :uri %>
-  </div>
-  <div class="actions">
-		<%= f.submit 'Shorten' %>
-  </div>
+<div class='row'>
+	<div class='col-lg-4 col-lg-offset-4'>
+		<div class='input-group'>
+			<%= f.text_field :uri, placeholder: 'e.g. http://google.com', class: 'form-control' %>
+			<span class='input-group-btn'>
+				<%= f.submit 'Shorten', class: 'btn btn-default' %>
+			</span>
+		</div>
+	</div>
+</div>
 <% end %>
-  <div class="field">
-    <%= label_tag :shortened_link %><br>
-    <%= text_field_tag 'shortened_link', root_url, disabled: true %>
-  </div>
 
-<%= button_tag "Copy", id: "copy_button" %>
+<div class='row'>
+	<div class='col-lg-4 col-lg-offset-4 text-center'>
+		<img src='http://www.babyproofingyourmarriage.com/wp-content/uploads/2012/02/arrow-down.png' class='text-center' />
+	</div>
+</div>
+
+<div class='row'>
+	<div class='col-lg-4 col-lg-offset-4'>
+		<div class='input-group'>
+			<%= text_field_tag 'shortened_link', nil, placeholder: 'Shortened link', class: 'form-control'	%>
+			<span class='input-group-btn'>
+				<%= button_tag "Copy", id: "copy_button", class: 'btn btn-default' %>
+			</span>
+		</div>
+	</div>
+</div>
+

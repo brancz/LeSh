@@ -46,6 +46,3 @@ gem 'whenever'
 
 # Use base62 gem to convert integer to string
 gem 'base62'
-
-# Use bootstrap
-gem 'twitter-bootstrap-rails'

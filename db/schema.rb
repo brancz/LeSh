@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20140119142144) do
 
   create_table "links", force: true do |t|
     t.string   "uri"
-    t.string   "short_route"
     t.boolean  "permanent"
     t.datetime "created_at"
     t.datetime "updated_at"

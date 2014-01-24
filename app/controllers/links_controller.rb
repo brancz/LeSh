@@ -20,7 +20,7 @@ class LinksController < ApplicationController
     respond_to do |format|
       if @link.save
         format.html { redirect_to links_path, notice: 'Link was successfully created.' }
-				format.json { render json: { short_link: root_url + @link.short_route } }
+				format.json { render json: { short_link: root_url + @link.id.base62_encode } }
       else
         format.html { render action: 'new' }
         format.json { render json: @link.errors, status: :unprocessable_entity }
@@ -31,7 +31,8 @@ class LinksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find_by_short_route(params[:short_route])
+			require 'base62'
+      @link = Link.find(params[:id].base62_decode)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -52,3 +52,6 @@ gem 'base62'
 
 # heroku
 gem 'rails_12factor'
+
+# puma instead of webrick
+gem 'puma'

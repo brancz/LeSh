@@ -4,13 +4,27 @@
 $(document).ready ->
 	$('form.new_link').on 'ajax:success', (xhr, data, status) ->
 		$('#shortened_link').val data.short_link
+		$('#shortened_link').parent().addClass 'has-success'
+		$('#copy_button').tooltip(container: 'body', title: 'click here to copy', placement: 'right', trigger: 'manual')
+		$('#copy_button').tooltip('show')
+		$('#link_uri').parent().removeClass 'has-error'
+		callback = ->
+			$('#copy_button').tooltip('hide')
+			$('#shortened_link').parent().removeClass 'has-success'
+		setTimeout callback, 3000
 
 	$('form.new_link').on 'ajax:error', (xhr, status, error) ->
 		$('#link_uri').parent().addClass 'has-error'
-		$('#link_uri').tooltip(container: 'body', title: 'your link is invalid', show: true)
+		$('#link_uri').tooltip(animation: true, container: 'body', title: 'your link is invalid', placement: 'bottom', trigger: 'manual')
+		$('#link_uri').tooltip('show')
+		callback = ->
+			$('#link_uri').tooltip('hide')
+			$('#link_uri').parent().removeClass 'has-error'
+		setTimeout callback, 3000
 
 	clip = new ZeroClipboard $("#copy_button"),
 		moviePath: "ZeroClipboard.swf"
 
 	clip.on "dataRequested", (client, args) ->
 		clip.setText $("#shortened_link").val()
+		$('shortened_link').parent().removeClass 'has-success'

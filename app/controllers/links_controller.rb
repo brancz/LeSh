@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:show]
+  before_action :set_link, only: [:show, :info_action]
 
   # GET /links/1
   # GET /links/1.json
@@ -11,6 +11,17 @@ class LinksController < ApplicationController
   def new
     @link = Link.new
   end
+
+	# GET /links/info
+	def info
+	end
+
+	# GET /links/info/1.json
+	def info_action
+		respond_to do |format|
+			format.json { render json: { uri: @link.uri } }
+		end
+	end
 
   # POST /links
   # POST /links.json

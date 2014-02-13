@@ -22,9 +22,15 @@ $(document).ready ->
 			$('#link_uri').parent().removeClass 'has-error'
 		setTimeout callback, 3000
 
-	clip = new ZeroClipboard $("#copy_button"),
-		moviePath: "ZeroClipboard.swf"
+	if $('#copy_button').length > 0
+		$('#copy_button').clip = new ZeroClipboard $("#copy_button"),
+			moviePath: "ZeroClipboard.swf"
 
-	clip.on "dataRequested", (client, args) ->
-		clip.setText $("#shortened_link").val()
-		$('shortened_link').parent().removeClass 'has-success'
+		clip.on "dataRequested", (client, args) ->
+			clip.setText $("#shortened_link").val()
+			$('shortened_link').parent().removeClass 'has-success'
+
+	$('#button_get_info').click ->
+		uri = $('#root_url').html() + $('#uri').val()
+		$('#shorted_uri').attr('href', uri)
+		$('#shorted_uri').html(uri)

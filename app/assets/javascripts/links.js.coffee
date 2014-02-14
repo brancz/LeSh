@@ -31,6 +31,13 @@ $(document).ready ->
 			$('shortened_link').parent().removeClass 'has-success'
 
 	$('#button_get_info').click ->
-		uri = $('#root_url').html() + $('#uri').val()
-		$('#shorted_uri').attr('href', uri)
-		$('#shorted_uri').html(uri)
+		$.ajax(
+			url: "/links/info/" + $('#uri').val() + ".json"
+			success: (data, status, xhr) ->
+				$('#shorted_uri').attr('href', data.uri)
+				$('#shorted_uri').html(data.uri)
+			error: (xhr, status, error) ->
+				uri = $('#root_url').html()
+				$('#shorted_uri').attr('href', uri)
+				$('#shorted_uri').html("Provided link does not exist")
+		)

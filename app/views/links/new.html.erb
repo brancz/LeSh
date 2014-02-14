@@ -8,7 +8,6 @@
 			<% if @link.errors.any? %>
 				<div id="error_explanation">
 					<h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
-
 					<ul>
 					<% @link.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
@@ -17,23 +16,19 @@
 				</div>
 			<% end %>
 
-		<div class='row'>
-			<div class='col-lg-8 col-lg-offset-2'>
-				<div class='input-group'>
-					<%= f.text_field :uri, placeholder: 'e.g. http://google.com', class: 'form-control' %>
-					<span class='input-group-btn'>
-						<%= f.submit 'Shorten', class: 'btn btn-default', id: 'button_shorten' %>
-					</span>
-				</div>
+		<div class='input-group margin-left-right'>
+			<%= f.text_field :uri, placeholder: 'e.g. http://google.com', class: 'form-control' %>
+			<span class='input-group-btn'>
+				<%= f.submit 'Shorten', class: 'btn btn-default', id: 'button_shorten' %>
+			</span>
+		</div>
 
-				<div class='input-group margin-top-20'>
-					<%= text_field_tag 'shortened_link', nil, placeholder: 'Shortened link', class: 'form-control'	%>
-					<span class='input-group-btn'>
-						<%= button_tag "Copy", id: "copy_button", class: 'btn btn-default' %>
-					</span>
-				</div>
-			<div>
-		<div>
+		<div class='input-group margin-top-20 margin-left-right'>
+			<%= text_field_tag 'shortened_link', nil, placeholder: 'Shortened link', class: 'form-control'	%>
+			<span class='input-group-btn'>
+				<%= button_tag "Copy", id: "copy_button", class: 'btn btn-default' %>
+			</span>
+		</div>
 		<% end %>
-
+		<p class='text-right margin-top-20'><a href='/links/info'>Get info about a link <span class='glyphicon glyphicon-arrow-right'></span></a><p>
 	</div>

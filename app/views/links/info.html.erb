@@ -3,18 +3,19 @@
 		<h1 class='text-center'>LeSh</h1>
 		<h2 class='text-center'>Get information for a shortlink</h2>
 
-		<div class='row'>
-			<div class='col-lg-8 col-lg-offset-2'>
-				<div class='input-group'>
-					<span id='root_url' class='input-group-addon'><%= root_url %></span>
-					<%= text_field_tag "uri", nil, class: 'form-control' %>
-					<span class='input-group-btn'>
-						<%= button_tag 'Get Info', class: 'btn btn-default', id: 'button_get_info' %>
-					</span>
-				</div>
+		<div class='input-group margin-left-right'>
+			<span id='root_url' class='input-group-addon'><%= root_url %></span>
+			<%= text_field_tag "uri", nil, class: 'form-control' %>
+			<span class='input-group-btn'>
+				<%= button_tag 'Get Info', class: 'btn btn-default', id: 'button_get_info' %>
+			</span>
+		</div>
 
-				<h4 class="text-center margin-top-20"><a id="shorted_uri" href="#"></a></h4>
-			<div>
-		<div>
-
+		<h4 class="text-center margin-top-20"><a id="shorted_uri" href="#"></a></h4>
+		<p class='text-left margin-top-20'>
+			<%= link_to root_url do %>
+				<span class='glyphicon glyphicon-arrow-left'></span>
+				Back
+			<% end %>
+		<p>
 	</div>

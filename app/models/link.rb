@@ -1,8 +1,11 @@
 class Link < ActiveRecord::Base
+
+  URL_REGEX = Regexp.new(URI::regexp, Regexp::IGNORECASE)
+
 	before_validation :escape_uri, on: :create
 
 	validates :uri, presence: true
-	validates :uri, format: { with: URI::regexp }
+	validates :uri, format: { with: URL_REGEX }
 	validate :is_uri?
 
 	def escape_uri

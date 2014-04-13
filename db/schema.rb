@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119142144) do
+ActiveRecord::Schema.define(version: 20140413174926) do
 
   create_table "links", force: true do |t|
-    t.string   "uri"
+    t.text     "uri",         limit: 255
+    t.string   "short_route"
     t.boolean  "permanent"
     t.datetime "created_at"
     t.datetime "updated_at"

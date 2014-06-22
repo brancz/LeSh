@@ -55,3 +55,5 @@ gem 'rails_12factor'
 
 # puma instead of webrick
 gem 'puma'
+
+gem 'zeroclipboard-rails'

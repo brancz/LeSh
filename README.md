@@ -6,3 +6,5 @@ It is extremely easy to deploy LeSh you just have to create a heroku app and pus
 	git clone https://github.com/flower-pot/LeSh.git
 	heroku create
 	git push heroku master
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)

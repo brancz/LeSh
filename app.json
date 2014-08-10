@@ -1,0 +1,15 @@
+{
+  "name": "Lesh",
+  "description": "Minimalistic link shortener",
+  "repository": "https://github.com/flower-pot/LeSh",
+  "keywords": [
+    "small",
+    "sharp",
+    "tool",
+    "link-shortener"
+  ],
+  "addons": ["heroku-postgresql:hobby-dev"],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  }
+}

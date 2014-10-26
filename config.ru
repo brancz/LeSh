@@ -4,7 +4,7 @@ require 'data_mapper'
 
 Bundler.require
 
-DataMapper.setup(:default, 'sqlite::memory:')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite::memory:')
 
 require './models/link'
 

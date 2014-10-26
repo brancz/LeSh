@@ -23,9 +23,15 @@ module LeSh
     end
 
     post '/api/links' do
-      uri = JSON.parse(request.body.read.to_s)['uri']
+      json = JSON.parse request.body.read.to_s
+      uri = json['uri']
+      if uri.nil?
+        status 422
+        return json error: 'uri must be set'
+      end
       if uri !~ /\A#{URI::regexp(['http', 'https'])}\z/
-        return status 422
+        status 422
+        return json error: 'uri must be valid'
       end
       link = Link.create(uri: uri, created_at: Time.now)
       json uri: link.id.base62_encode
@@ -34,7 +40,8 @@ module LeSh
     get '/api/links/:id' do
       link = Link.get(params[:id].base62_decode)
       if link.nil?
-        return status 404
+        status 404
+        return json error: 'could not find the requested link'
       end
       json uri: link.uri
     end

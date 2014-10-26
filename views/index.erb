@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LeSh</title>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+    <script>
+        $(function() {
+            $('#button_shorten').click(function() {
+                var link = $('#link_uri').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: JSON.stringify({uri: link}),
+                    success: function(data, status, xhr) {
+                        $('#shortened_link').val(data.uri);
+                    },
+                    error: function(xhr, status, error) {
+
+                    }
+                });
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <div class='container' style='padding-top: 40px;'>
+      <div class='row'>
+        <div class='col-lg-6 col-lg-offset-3 well'>
+          <h1 class='text-center'>LeSh</h1>
+          <h2 class='text-center'>Le Link Shortener</h2>
+          <div class='input-group margin-left-right'>
+            <input class="form-control" id="link_uri" name="link[uri]" placeholder="e.g. http://google.com" type="text" />
+            <span class='input-group-btn'>
+              <input class="btn btn-default" id="button_shorten" name="commit" type="submit" value="Shorten" />
+            </span>
+          </div>
+          <div class="input-group margin-top-20 margin-left-right">
+            <input class="form-control copy_data" id="shortened_link" name="shortened_link" type="text" />
+            <span class='input-group-btn'>
+              <button class='copy_button btn btn-default' type='button' ng-click='copy'>
+                <span class="translation_missing" title="translation missing: en.copy">Copy</span>
+              </button>
+            </span>
+          </div>
+          <p class='text-right margin-top-20'><a href='/links/info'>Get info about a link <span class='glyphicon glyphicon-arrow-right'></span></a><p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

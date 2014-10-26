@@ -1,7 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/json'
 require 'json'
-require 'base62'
 
 require './models/link'
 
@@ -14,36 +13,31 @@ module LeSh
     end
 
     get '/:id' do
-      id = params[:id]
-      link = Link.get(id.base62_decode)
-      if link.nil?
-        return status 404
-      end
-      redirect link.uri
-    end
-
-    post '/api/links' do
-      json = JSON.parse request.body.read.to_s
-      uri = json['uri']
-      if uri.nil?
-        status 422
-        return json error: 'uri must be set'
-      end
-      if uri !~ /\A#{URI::regexp(['http', 'https'])}\z/
-        status 422
-        return json error: 'uri must be valid'
-      end
-      link = Link.create(uri: uri, created_at: Time.now)
-      json uri: link.id.base62_encode
+      on_link(lambda { |link| redirect link.uri } )
     end
 
     get '/api/links/:id' do
-      link = Link.get(params[:id].base62_decode)
-      if link.nil?
-        status 404
-        return json error: 'could not find the requested link'
+      on_link(lambda { |link| json uri: link.uri } )
+    end
+
+    post '/api/links' do
+      uri = JSON.parse(request.body.read.to_s)['uri']
+      link = Link.new(uri: uri, created_at: Time.now)
+      unless link.save
+        status 422
+        return json(errors: link.errors.full_messages)
       end
-      json uri: link.uri
+      json(uri: link.internal_uri)
+    end
+
+    def on_link(code)
+      begin
+        link = Link.by_string_id params[:id]
+        code.call(link)
+      rescue DataMapper::ObjectNotFoundError
+        status 404
+        json({errors: ['Uri could not be found']})
+      end
     end
   end
 end

@@ -19,7 +19,7 @@
                         $('#shortened_link').val(data.uri);
                     },
                     error: function(xhr, status, error) {
-
+                        console.log(xhr.responseJSON);
                     }
                 });
             });

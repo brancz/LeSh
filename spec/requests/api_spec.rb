@@ -10,6 +10,7 @@ describe 'LeSh Api' do
   it 'should redirect correctly when following a generated link' do
     uri = 'http://google.com/'
     post '/api/links', {uri: uri}.to_json, 'CONTENT_TYPE' => 'application/json'
+    expect(last_response.status).to eq(201)
     response = JSON.parse last_response.body
     get response['internal_uri']
     expect(last_response.status).to eq(302)

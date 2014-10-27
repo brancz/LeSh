@@ -30,6 +30,7 @@ module LeSh
         status 422
         return json(errors: link.errors.full_messages)
       end
+      status 201
       json(link)
     end
 

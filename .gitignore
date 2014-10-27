@@ -17,3 +17,4 @@
 
 .vagrant
 .env
+coverage

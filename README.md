@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/flower-pot/LeSh.svg)](https://travis-ci.org/flower-pot/LeSh)
+
 Deloyment
 =========
 

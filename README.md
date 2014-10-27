@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/flower-pot/LeSh.svg)](https://travis-ci.org/flower-pot/LeSh)
+[![Coverage Status](https://img.shields.io/coveralls/flower-pot/LeSh.svg)](https://coveralls.io/r/flower-pot/LeSh)
+[![Code Climate](https://codeclimate.com/github/flower-pot/LeSh/badges/gpa.svg)](https://codeclimate.com/github/flower-pot/LeSh)
 
 Deloyment
 =========

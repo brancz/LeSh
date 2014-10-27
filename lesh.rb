@@ -1,8 +1,11 @@
 require 'sinatra/base'
 require 'sinatra/json'
 require 'json'
+require 'data_mapper'
 
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite::memory:')
 require './models/link'
+DataMapper.finalize.auto_upgrade!
 
 module LeSh
   class App < Sinatra::Base
@@ -17,7 +20,7 @@ module LeSh
     end
 
     get '/api/links/:id' do
-      on_link(lambda { |link| json uri: link.uri } )
+      on_link(lambda { |link| json link } )
     end
 
     post '/api/links' do
@@ -27,7 +30,7 @@ module LeSh
         status 422
         return json(errors: link.errors.full_messages)
       end
-      json(uri: link.internal_uri)
+      json(link)
     end
 
     def on_link(code)
@@ -40,4 +43,12 @@ module LeSh
       end
     end
   end
+end
+
+module LeSh
+  def base_url
+    ENV['BASE_URL'] || 'http://localhost:5000/'
+  end
+
+  module_function :base_url
 end

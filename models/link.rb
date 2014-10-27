@@ -1,4 +1,5 @@
 require 'base62'
+require 'json'
 
 class Link
   include DataMapper::Resource
@@ -10,8 +11,20 @@ class Link
   validates_presence_of :uri
   validates_format_of   :uri, with: /\A#{URI::regexp(['http', 'https'])}\z/
 
+  def to_json(options = {})
+    JSON.pretty_generate({
+      uri: uri, 
+      internal_uri: internal_uri, 
+      internal_api_uri: internal_api_uri
+    }, options)
+  end
+
   def internal_uri
-    ENV['BASE_URL'] + id.base62_encode
+    "#{LeSh.base_url}#{id.base62_encode}"
+  end
+
+  def internal_api_uri
+    "#{LeSh.base_url}api/links/#{id.base62_encode}"
   end
 
   def self.by_string_id(id)

@@ -16,7 +16,7 @@
                     dataType: 'json',
                     data: JSON.stringify({uri: link}),
                     success: function(data, status, xhr) {
-                        $('#shortened_link').val(data.uri);
+                        $('#shortened_link').val(data.internal_uri);
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr.responseJSON);

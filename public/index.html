@@ -3,6 +3,11 @@
   <head>
     <title>LeSh</title>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css" />
+    <style>
+      .hasErrors {
+        border: 1px solid #d9534f;
+      }
+    </style>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.min.js" type="text/javascript"></script>
@@ -18,9 +23,20 @@
                     data: JSON.stringify({uri: link}),
                     success: function(data, status, xhr) {
                         $('#shortened_link').val(data.internal_uri);
+                        $('#errors').html('');
+                        $('#link_uri').removeClass('hasErrors');
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr.responseJSON);
+                        error_list = '<ul>';
+                        errors = xhr.responseJSON.errors;
+                        errors.forEach(function(error) {
+                            error_list += '<li>';
+                            error_list += error;
+                            error_list += '</li>';
+                        });
+                        error_list += '</ul>';
+                        $('#errors').html(error_list);
+                        $('#link_uri').addClass('hasErrors');
                     }
                 });
             });
@@ -46,6 +62,7 @@
               <input class="btn btn-default" id="button_shorten" type="submit" value="Shorten" style="width: 80px;" />
             </span>
           </div>
+          <div id="errors" style="margin-top: 10px; color: #d9534f;"></div>
           <div class="input-group" style="margin: 10px 10px 0px 10px;">
             <input class="form-control" id="shortened_link" type="text" />
             <span class="input-group-btn">

@@ -27,26 +27,25 @@
     </script>
   </head>
   <body>
-    <div class='container' style='padding-top: 40px;'>
-      <div class='row'>
-        <div class='col-lg-6 col-lg-offset-3 well'>
-          <h1 class='text-center'>LeSh</h1>
-          <h2 class='text-center'>Le Link Shortener</h2>
-          <div class='input-group margin-left-right'>
-            <input class="form-control" id="link_uri" name="link[uri]" placeholder="e.g. http://google.com" type="text" />
-            <span class='input-group-btn'>
-              <input class="btn btn-default" id="button_shorten" name="commit" type="submit" value="Shorten" />
+    <div class="container" style="padding-top: 40px;">
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 well">
+          <h1 class="text-center">LeSh</h1>
+          <h2 class="text-center">Le Link Shortener</h2>
+          <div class="input-group" style="margin: 30px 10px 0px 10px;">
+            <input class="form-control" id="link_uri" placeholder="e.g. http://google.com" type="text" />
+            <span class="input-group-btn">
+              <input class="btn btn-default" id="button_shorten" type="submit" value="Shorten" style="width: 80px;" />
             </span>
           </div>
-          <div class="input-group margin-top-20 margin-left-right">
-            <input class="form-control copy_data" id="shortened_link" name="shortened_link" type="text" />
-            <span class='input-group-btn'>
-              <button class='copy_button btn btn-default' type='button' ng-click='copy'>
-                <span class="translation_missing" title="translation missing: en.copy">Copy</span>
+          <div class="input-group" style="margin: 10px 10px 0px 10px;">
+            <input class="form-control" id="shortened_link" type="text" />
+            <span class="input-group-btn">
+              <button class="copy_button btn btn-default" type="button" style="width: 80px;">
+                <span>Copy</span>
               </button>
             </span>
           </div>
-          <p class='text-right margin-top-20'><a href='/links/info'>Get info about a link <span class='glyphicon glyphicon-arrow-right'></span></a><p>
         </div>
       </div>
     </div>

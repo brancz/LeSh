@@ -3,6 +3,6 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'data_mapper'
-gem 'dm-postgres-adapter'
-gem 'dm-sqlite-adapter'
+gem 'dm-postgres-adapter', group: :production
+gem 'dm-sqlite-adapter', group: [:development, :test]
 gem 'base62'

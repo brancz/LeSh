@@ -7,6 +7,11 @@ describe 'LeSh Api' do
     LeSh::App
   end
 
+  it 'should serve static files' do
+    get '/'
+    expect(last_response.status).to eq(200)
+  end
+
   it 'should redirect correctly when following a generated link' do
     uri = 'http://google.com/'
     post '/api/links', {uri: uri}.to_json, 'CONTENT_TYPE' => 'application/json'
@@ -51,5 +56,19 @@ describe 'LeSh Api' do
     response = JSON.parse last_response.body
     expect(last_response.status).to eq(422)
     expect(response['errors']).to eq(['Uri must not be blank'])
+  end
+
+  it 'should error with not found when the requested link does not exist' do
+    get '/A'
+    expect(last_response.status).to eq(404)
+    response = JSON.parse last_response.body
+    expect(response['errors']).to eq(['Uri could not be found'])
+  end
+
+  it 'the api should error with not found when the requested link does not exist' do
+    get '/api/links/A'
+    response = JSON.parse last_response.body
+    expect(last_response.status).to eq(404)
+    expect(response['errors']).to eq(['Uri could not be found'])
   end
 end

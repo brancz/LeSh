@@ -8,5 +8,10 @@
     "tool",
     "link-shortener"
   ],
+  "env": {
+    "BASE_URL": {
+      "description": "The base url to use when generating short links. E.g. \"http://myleshinstance.com/\""
+    }
+  },
   "addons": ["heroku-postgresql:hobby-dev"]
 }

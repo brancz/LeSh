@@ -25,6 +25,16 @@
                         $('#shortened_link').val(data.internal_uri);
                         $('#errors').html('');
                         $('#link_uri').removeClass('hasErrors');
+                        $('#copy_button').tooltip('destroy')
+                                         .tooltip({
+                            container: 'body',
+                            title: 'click here to copy',
+                            placement: 'right',
+                            trigger: 'manual'
+                        }).tooltip('show');
+                        setTimeout(function() {
+                            $('#copy_button').tooltip('hide');
+                        }, 3000);
                     },
                     error: function(xhr, status, error) {
                         error_list = '<ul>';
@@ -45,6 +55,16 @@
                 client.on( "copy", function( event ) {
                     var clipboard = event.clipboardData;
                     clipboard.setData( "text/plain", $('#shortened_link').val() );
+                    $('#copy_button').tooltip('destroy')
+                                     .tooltip({
+                        container: 'body',
+                        title: 'copied!',
+                        placement: 'right',
+                        trigger: 'manual'
+                    }).tooltip('show');
+                    setTimeout(function() {
+                        $('#copy_button').tooltip('hide');
+                    }, 3000);
                 } );
             } );
         });

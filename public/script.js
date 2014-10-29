@@ -11,12 +11,12 @@ $(function() {
             },
             error: function(xhr, status, error) {
                 $('#link').html('<span>' + error + '</span>');
-                $('#link-id').addClass('hasErrors');
+                $('#link-id').addClass('has-errors');
             }
         });
     });
-    $('#button_shorten').click(function() {
-        var link = $('#link_uri').val();
+    $('#button-shorten').click(function() {
+        var link = $('#link-uri').val();
         $.ajax({
             type: 'POST',
             url: '/api/links',
@@ -24,17 +24,17 @@ $(function() {
             dataType: 'json',
             data: JSON.stringify({uri: link}),
             success: function(data, status, xhr) {
-                $('#shortened_link').val(data.internal_uri);
-                $('#errors').html('');
-                $('#link_uri').removeClass('hasErrors');
-                $('#copy_button').tooltip('destroy').tooltip({
+                $('#shortened-link').val(data.internal_uri);
+                $('#main .errors').html('');
+                $('#link-uri').removeClass('has-errors');
+                $('#copy-button').tooltip('destroy').tooltip({
                     container: 'body',
                     title: 'click here to copy',
                     placement: 'right',
                     trigger: 'manual'
                 }).tooltip('show');
                 setTimeout(function() {
-                    $('#copy_button').tooltip('hide');
+                    $('#copy-button').tooltip('hide');
                 }, 3000);
             },
             error: function(xhr, status, error) {
@@ -46,24 +46,24 @@ $(function() {
                     errorList += '</li>';
                 });
                 errorList += '</ul>';
-                $('#main.errors').html(errorList);
-                $('#link_uri').addClass('hasErrors');
+                $('#main .errors').html(errorList);
+                $('#link-uri').addClass('has-errors');
             }
         });
     });
-    var client = new ZeroClipboard(document.getElementById("copy_button"));
+    var client = new ZeroClipboard(document.getElementById("copy-button"));
     client.on("ready", function(readyEvent) {
         client.on("copy", function(event) {
             var clipboard = event.clipboardData;
-            clipboard.setData("text/plain", $('#shortened_link').val());
-            $('#copy_button').tooltip('destroy').tooltip({
+            clipboard.setData("text/plain", $('#shortened-link').val());
+            $('#copy-button').tooltip('destroy').tooltip({
                 container: 'body',
                 title: 'copied!',
                 placement: 'right',
                 trigger: 'manual'
             }).tooltip('show');
             setTimeout(function() {
-                $('#copy_button').tooltip('hide');
+                $('#copy-button').tooltip('hide');
             }, 3000);
         });
     });
@@ -72,7 +72,7 @@ $(function() {
         $('#back-link').show();
         $('#main').hide();
         $('#lookup').show();
-        $('#copy_button').tooltip('hide');
+        $('#copy-button').tooltip('hide');
     });
     $('#back-link').click(function() {
         $('#back-link').hide();
@@ -81,6 +81,6 @@ $(function() {
         $('#main').show();
         $('#link').html('');
         $('#link-id').val('');
-        $('#link-id').removeClass('hasErrors');
+        $('#link-id').removeClass('has-errors');
     });
 });

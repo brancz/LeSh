@@ -7,6 +7,10 @@
       .hasErrors {
         border: 1px solid #d9534f;
       }
+
+      .link {
+        cursor: pointer;
+      }
     </style>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
@@ -26,7 +30,7 @@
                 <input class="btn btn-default" id="button_shorten" type="submit" value="Shorten" style="width: 80px;" />
               </span>
             </div>
-            <div id="errors" style="color: #d9534f;"></div>
+            <div class="errors" style="color: #d9534f;"></div>
             <div class="input-group">
               <input class="form-control" id="shortened_link" type="text" />
               <span class="input-group-btn">
@@ -47,8 +51,8 @@
             <div id="link" class="text-center" style="margin-top: 10px;"></div>
           </div>
           <div id="switcher" class="clearfix" style="margin-top: 10px;">
-            <a id="back-link" class="pull-left" style="display: none;">Back</a>
-            <a id="lookup-link" class="pull-right">Lookup a link</a>
+            <a id="back-link" class="pull-left link" style="display: none;">Back</a>
+            <a id="lookup-link" class="pull-right link">Lookup a link</a>
           </div>
         </div>
       </div>

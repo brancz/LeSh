@@ -10,7 +10,8 @@ $(function() {
                 $('#link').html('<a href="' + data.uri + '">' + data.uri + '</a>');
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseJSON.errors);
+                $('#link').html('<span>' + error + '</span>');
+                $('#link-id').addClass('hasErrors');
             }
         });
     });
@@ -37,15 +38,15 @@ $(function() {
                 }, 3000);
             },
             error: function(xhr, status, error) {
-                error_list = '<ul>';
+                errorList = '<ul>';
                 errors = xhr.responseJSON.errors;
                 errors.forEach(function(error) {
-                    error_list += '<li>';
-                    error_list += error;
-                    error_list += '</li>';
+                    errorList += '<li>';
+                    errorList += error;
+                    errorList += '</li>';
                 });
-                error_list += '</ul>';
-                $('#errors').html(error_list);
+                errorList += '</ul>';
+                $('#main.errors').html(errorList);
                 $('#link_uri').addClass('hasErrors');
             }
         });
@@ -71,11 +72,15 @@ $(function() {
         $('#back-link').show();
         $('#main').hide();
         $('#lookup').show();
+        $('#copy_button').tooltip('hide');
     });
     $('#back-link').click(function() {
         $('#back-link').hide();
         $('#lookup-link').show();
         $('#lookup').hide();
         $('#main').show();
+        $('#link').html('');
+        $('#link-id').val('');
+        $('#link-id').removeClass('hasErrors');
     });
 });
